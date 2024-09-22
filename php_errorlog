@@ -1,0 +1,14 @@
+[21-Sep-2024 17:59:33 CST6CDT] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:355
+Stack trace:
+#0 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#1 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(913): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(888): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(813): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#4 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(704): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#5 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(592): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Error))
+#6 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(512): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Error))
+#7 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(149): Illuminate\Foundation\Http\Kernel->renderException(Object(Illuminate\Http\Request), Object(Error))
+#8 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1188): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#9 /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/index.php(17): Illuminate\Foundation\Application->handleRequest(Object(Illuminate\Http\Request))
+#10 {main}
+  thrown in /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 355
