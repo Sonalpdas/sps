@@ -1,0 +1,1 @@
+[23-Sep-2024 02:27:53 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/customer/www/dev.api.sunshinepreschool1-2.org/public_html/sunshine_api/app/Http/Controllers/EventController.php on line 4

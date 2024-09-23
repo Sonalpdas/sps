@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Mail\EventActionMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -24,6 +27,19 @@ class EventController extends Controller
         ]);
 
         $event = Event::create($validatedData);
+        
+        try {            
+            // Send email to the user
+            Mail::to($event->email)->send(new EventActionMail('added', $event, 'user'));
+
+            // Send email to the organization
+            Mail::to('support@sunshinepreschool1-2.org')->send(new EventActionMail('added', $event, 'organization'));
+
+        } catch (\Exception $e) {
+            // Log the error and allow the process to continue
+            Log::error('Email failed to send: ' . $e->getMessage());
+        }
+        
 
         return response()->json($event, 201);  // HTTP 201 Created
     }

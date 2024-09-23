@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactActionMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+
 
 class ContactController extends Controller
 {
@@ -24,7 +28,21 @@ class ContactController extends Controller
             'reason' => 'required|string|max:32',
         ]);
 
+        // Create the contact
         $contact = Contact::create($validatedData);
+
+        try {
+            // Attempt to send the email to the user
+            Mail::to($contact->email)->send(new ContactActionMail('added', $contact, 'user'));
+
+            // Attempt to send the email to the organization
+            Mail::to('support@sunshinepreschool1-2.org')->send(new ContactActionMail('added', $contact, 'organization'));
+
+        } catch (\Exception $e) {
+            // Log the error and allow the process to continue
+            Log::error('Email failed to send: ' . $e->getMessage());
+        }
+
 
         return response()->json($contact, 201);
     }

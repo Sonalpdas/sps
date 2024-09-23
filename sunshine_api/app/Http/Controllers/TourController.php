@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use App\Mail\TourActionMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class TourController extends Controller
 {
@@ -30,6 +33,18 @@ class TourController extends Controller
         ]);
 
         $tour = Tour::create($validatedData);
+
+        try {
+            // Send email to the user
+            Mail::to($tour->email)->send(new TourActionMail('added', $tour, 'user'));
+
+            // Send email to the organization
+            Mail::to('support@sunshinepreschool1-2.org')->send(new TourActionMail('added', $tour, 'organization'));
+
+        } catch (\Exception $e) {
+            // Log the error and allow the process to continue
+            Log::error('Email failed to send: ' . $e->getMessage());
+        }            
 
         return response()->json($tour, 201);  // HTTP 201 Created
     }

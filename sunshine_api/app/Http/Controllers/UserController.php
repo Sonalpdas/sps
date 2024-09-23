@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\UserActionMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -28,6 +31,18 @@ class UserController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         $user = User::create($validatedData);
+        
+        try {
+            // Send email to the user
+            Mail::to($user->email)->send(new UserActionMail('added', $user, 'user'));
+
+            // Send email to the organization
+            Mail::to('support@sunshinepreschool1-2.org')->send(new UserActionMail('added', $user, 'organization'));
+
+        } catch (\Exception $e) {
+            // Log the error and allow the process to continue
+            Log::error('Email failed to send: ' . $e->getMessage());
+        }              
 
         return response()->json($user, 201);  // HTTP 201 Created
     }

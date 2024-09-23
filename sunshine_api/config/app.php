@@ -142,6 +142,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\Mail\MailServiceProvider::class,
+        
         
         
     
